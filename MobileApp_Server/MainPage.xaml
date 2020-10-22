@@ -13,7 +13,15 @@
     <Grid VerticalAlignment="Top">
         <Viewbox>
             <Grid >
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="0">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" >
                         <TextBlock Text="Server Active" Margin="0,5,0,0" ></TextBlock>
                         <ToggleSwitch x:Name="ServerButton" Margin="10,0,0,0" Toggled="ServerButton_Toggled"/>
@@ -21,10 +29,8 @@
                             <Button x:Name="ItemAdd" Content="Add Item" CornerRadius="5" Background="#FF3A5DBF" Click="ItemAdd_Click"/>
                             <Button x:Name="EditItem" Content="Edit Item" CornerRadius="5" Margin="5,0,0,0" Background="#FF3A5DBF"/>
                         </StackPanel>
-                            
-                        
                     </StackPanel>
-                    <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <!--<StackPanel Orientation="Vertical" Margin="0,10,0,0">
                         <Grid Margin="10,0,0,0">
                             <Grid.RowDefinitions >
                                 <RowDefinition Height="*" />
@@ -63,8 +69,9 @@
                                 </DataTemplate>
                             </GridView.ItemTemplate>
                         </GridView>
-                    </StackPanel>
+                    </StackPanel>-->
                 </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1"></StackPanel>
 
             </Grid>
         </Viewbox>

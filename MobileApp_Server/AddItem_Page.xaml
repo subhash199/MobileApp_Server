@@ -45,9 +45,8 @@
                     <x:String>No</x:String>
                 </ComboBox>
                 <StackPanel Grid.Row="3" Grid.ColumnSpan="4" HorizontalAlignment="Center" Orientation="Horizontal">
-                    <Button x:Name="addItemButton" Content="Add Item" CornerRadius="10" Height="50" Width="200" Background="#333144D1" Click="addItemButton_Click"></Button>
-                    <Button x:Name="clearButton" Content="Clear" CornerRadius="10" Height="50" Width="200" Margin="10,0,0,0"  Background="#33D4BA14"></Button>
-                    <Button x:Name="backButton" Content="Back" CornerRadius="10" Height="50" Width="200" Margin="10,0,0,0"  Background="#33F35F0C"></Button>
+                    <Button x:Name="addItemButton" Content="Add Item" CornerRadius="10" Height="50" Width="200" Background="#333144D1" Click="addItemButton_Click"></Button>                  
+                    <Button x:Name="backButton" Content="Back" CornerRadius="10" Height="50" Width="200" Margin="10,0,0,0"  Background="#33F35F0C" Click="backButton_Click"></Button>
 
 
 

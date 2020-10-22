@@ -31,5 +31,12 @@ namespace MobileApp_Server
         {
 
         }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MainPage));
+        }
+
+    
     }
 }
