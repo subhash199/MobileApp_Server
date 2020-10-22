@@ -13,32 +13,23 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace MobileApp_Server
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class AddItem_Page : Page
     {
-        private List<Products_Class> products = new List<Products_Class>();
-        public MainPage()
+        public AddItem_Page()
         {
             this.InitializeComponent();
-           
-            
-           
         }
 
-        private void ServerButton_Toggled(object sender, RoutedEventArgs e)
+        private void addItemButton_Click(object sender, RoutedEventArgs e)
         {
 
-        }
-
-        private void ItemAdd_Click(object sender, RoutedEventArgs e)
-        {           
-            Frame.Navigate(typeof(AddItem_Page));
         }
     }
 }
