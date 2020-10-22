@@ -9,6 +9,60 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <Grid>
+            <Viewbox>
+                <Grid Margin="0,0,0,200">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="#FFDADAEA">
+                            <TextBlock Text="Server Active" Margin="0,5,0,0" ></TextBlock>
+                            <ToggleSwitch x:Name="ServerButton" Margin="10,0,0,0" Toggled="ServerButton_Toggled"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="80"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="80"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Product_ID| "/>
+                                <TextBlock Grid.Column="1" Text=" Product_Name| "/>
+                                <TextBlock Grid.Column="2" Text=" Category|"/>
+                                <TextBlock Grid.Column="3" Text=" Price| "/>
+                                <TextBlock Grid.Column="4" Text=" Availability"/>
+                            </Grid>
+                            <!--<ScrollViewer>-->
+                            <GridView x:Name="ProductsListView" ItemsSource="{Binding}">
+                                    <GridView.ItemTemplate>
+                                        <DataTemplate x:DataType="local:Products_Class">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="90"/>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="80"/>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="80"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" Text="{Binding product_ID}"/>
+                                                <TextBlock Grid.Column="1" Text="{Binding product_Name}"/>
+                                                <TextBlock Grid.Column="2" Text="{Binding category}"/>
+                                                <TextBlock Grid.Column="3" Text="{Binding price}"/>
+                                                <TextBlock Grid.Column="4" Text="{Binding toggle}"/>
+                                                
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridView.ItemTemplate>
+                                </GridView>
+                            <!--</ScrollViewer>-->
+
+                        </StackPanel>
+                    </StackPanel>
+
+                </Grid>
+            </Viewbox>
+
+        </Grid>
 
     </Grid>
 </Page>

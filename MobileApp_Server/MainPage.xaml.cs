@@ -25,6 +25,21 @@ namespace MobileApp_Server
         public MainPage()
         {
             this.InitializeComponent();
+            List<Products_Class> products = new List<Products_Class>();
+            ToggleSwitch milk_Toggle = new ToggleSwitch();
+            products.Add(new Products_Class() { product_ID = 1, product_Name = "Milk", category = "Grocery", price = 1.00, toggle = milk_Toggle });
+            for (int i = 0; i < products.Count; i++)
+            {
+                ProductsListView.ItemsSource = products;
+                
+               // ProductsListView.Items.Add(products[i]);
+            }
+
+        }
+
+        private void ServerButton_Toggled(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
