@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace MobileApp_Server
@@ -29,7 +30,7 @@ namespace MobileApp_Server
 
         private void addItemButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //MainPage.sqliteConnection
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
