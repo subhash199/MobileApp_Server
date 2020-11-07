@@ -56,30 +56,31 @@
                                 <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="200"/>
                                 <ColumnDefinition Width="200"/>
-                                <ColumnDefinition Width="200"/>
+
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="product_ID" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="1" Text="product_Name" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="2" Text="category" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="3" Text="price" HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="4" Text="Availability" HorizontalAlignment="Center" />
+
+                            <TextBlock Grid.Column="0" Text="product_Name" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="category" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="price" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="Availability" HorizontalAlignment="Center" />
                             <Border Grid.Column="0" BorderBrush="Black" BorderThickness="2"/>
                             <Border Grid.Column="1" BorderBrush="Black" BorderThickness="2"/>
                             <Border Grid.Column="2" BorderBrush="Black" BorderThickness="2"/>
                             <Border Grid.Column="3" BorderBrush="Black" BorderThickness="2"/>
                             <Border Grid.Column="4" BorderBrush="Black" BorderThickness="2"/>
                             <Border Grid.Row="1" BorderBrush="Black" BorderThickness="2"/>
-                            
+
                         </Grid>
                         <GridView ItemsSource="{x:Bind products}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="data:Products_Class">
-                                    <StackPanel Orientation="Horizontal" Margin="10,0,0,0" >
-                                        <TextBlock Text="{x:Bind product_ID}" Width="200" HorizontalTextAlignment="Center" />
-                                        <TextBlock Text="{x:Bind product_Name}" Width="200" HorizontalTextAlignment="Center"/>
-                                        <TextBlock Text="{x:Bind category}" Width="200" HorizontalTextAlignment="Center"/>
-                                        <TextBlock Text="{x:Bind price}" Width="200" HorizontalTextAlignment="Center"/>
-                                        <ToggleSwitch Margin="10,0,0,0" Width="200"/>
+                                    <StackPanel >
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind product_Name}" Width="200" Height="50" HorizontalTextAlignment="Center"/>
+                                            <TextBlock Text="{x:Bind category}" Width="200" Height="50" HorizontalTextAlignment="Center"/>
+                                            <TextBlock Text="{x:Bind price}" Width="200" Height="50" HorizontalTextAlignment="Center"/>
+                                            <ToggleSwitch Margin="10,0,0,0" Height="50" Width="200"/>
+                                        </StackPanel>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

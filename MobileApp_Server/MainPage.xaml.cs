@@ -29,62 +29,31 @@ namespace MobileApp_Server
     public sealed partial class MainPage : Page
     {
         private List<Products_Class> products = new List<Products_Class>();
-        private static string databasePath;
         public static SqliteConnection sqliteConnection;
         public static SqliteCommand command = new SqliteCommand();
         public static SqliteDataReader reader;
-       
+        private DatabaseRequest request = new DatabaseRequest();
         public MainPage()
         {
             
             this.InitializeComponent();
             try
             {
-                CreateDatabase();
-                ShowProducts();
+               request.CreateDatabase();             
+               products=request.ShowProducts();
               
             }
             catch( Exception e)
             {
-                MessageDialog dialog = new MessageDialog(e.ToString());
-                dialog.ShowAsync();
+              //  MessageDialog dialog = new MessageDialog(e.ToString());
+               // dialog.ShowAsync();
                 
             }
            
         }
 
-        private void ShowProducts()
-        {
-            command = new SqliteCommand("Select * from products;", sqliteConnection);
-            reader = command.ExecuteReader();
-            while(reader.Read())
-            {
-                
-                if (reader.GetInt16(4) ==1)
-                {
-                    ToggleSwitch toggleSwitch = new ToggleSwitch();
-                    toggleSwitch.IsOn = true;
-                }
-                else
-                {
-                    ToggleSwitch toggleSwitch = new ToggleSwitch();
-                    toggleSwitch.IsOn = false;
-                }
-                products.Add(new Products_Class() { product_ID = reader.GetInt32(0), product_Name = reader.GetString(1), category = reader.GetString(2), price = reader.GetDouble(3), });
-            }
-        }
-
-        private async void CreateDatabase()
-        {
-            await ApplicationData.Current.LocalFolder.CreateFileAsync("ProductData.db", CreationCollisionOption.OpenIfExists);
-            databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "ProductData.db");
-            sqliteConnection = new SqliteConnection($"Filename={databasePath}");
-            sqliteConnection.Open();
-            string tableCreate = "CREATE TABLE IF NOT EXISTS products (ProductID INTEGER PRIMARY KEY, ProductName TEXT, Category TEXT, Price DECIMAL, Availability INTEGER)";
-            command = new SqliteCommand(tableCreate, sqliteConnection);
-            command.ExecuteReader();
-           
-        }
+    
+     
      
         private  void ServerButton_Toggled(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Data.Sqlite;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace MobileApp_Server
     /// </summary>
     public sealed partial class AddItem_Page : Page
     {
+        private DatabaseRequest request = new DatabaseRequest();
         public AddItem_Page()
         {
             this.InitializeComponent();
@@ -30,7 +32,17 @@ namespace MobileApp_Server
 
         private void addItemButton_Click(object sender, RoutedEventArgs e)
         {
-            //MainPage.sqliteConnection
+            int pAvailable = 0;
+            if(available.SelectedIndex== 0)
+            {
+                pAvailable = 1;
+            }
+            else
+            {
+                pAvailable = 0;
+            }
+            request.AddItem(productNameBox.Text,categoryBox.SelectedItem.ToString(), double.Parse(priceBox.Text),pAvailable);
+       
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

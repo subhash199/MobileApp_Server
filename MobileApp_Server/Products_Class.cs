@@ -9,7 +9,7 @@ namespace MobileApp_Server
 {
     public class Products_Class
     {
-        public int product_ID { get; set; }
+       
         public string product_Name { get; set; }
         public string category { get; set; }
 
