@@ -39,8 +39,9 @@ namespace MobileApp_Server
             this.InitializeComponent();
             try
             {
-               request.CreateDatabase();             
-               products=request.ShowProducts();
+               request.CreateDatabase();
+                InventoryList.ItemsSource = request.ShowProducts();
+               
               
             }
             catch( Exception e)
@@ -57,10 +58,10 @@ namespace MobileApp_Server
      
         private  void ServerButton_Toggled(object sender, RoutedEventArgs e)
         {
-            if (ServerButton.IsOn == true)
-            {
+            //if (ServerButton.IsOn == true)
+            //{
 
-            }
+            //}
         }
 
         private void ItemAdd_Click(object sender, RoutedEventArgs e)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.Sqlite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace MobileApp_Server
         private SqliteCommand command = new SqliteCommand();
         private SqliteDataReader reader;
         private string databasePath;
-        private List<Products_Class> products = new List<Products_Class>();
+    
         public async void CreateDatabase()
         {
             await ApplicationData.Current.LocalFolder.CreateFileAsync("ProductData.db", CreationCollisionOption.OpenIfExists);
@@ -36,12 +37,12 @@ namespace MobileApp_Server
             command.ExecuteReader();
         }
 
-        public List<Products_Class> ShowProducts()
+        public ObservableCollection<Products_Class> ShowProducts()
         {
             OpenConnection();
             command = new SqliteCommand("Select * from products;", sqliteConnection);
             reader = command.ExecuteReader();
-            
+             var products = new ObservableCollection<Products_Class>();
             while (reader.Read())
             {
                 ToggleSwitch toggleSwitch = new ToggleSwitch();
