@@ -17,10 +17,13 @@ namespace MobileApp_Server
         private SqliteCommand command = new SqliteCommand();
         private SqliteDataReader reader;
         private string databasePath;
-    
+        private string databaseName = "ProductData.db";
+
+
         public async void CreateDatabase()
         {
-            await ApplicationData.Current.LocalFolder.CreateFileAsync("ProductData.db", CreationCollisionOption.OpenIfExists);
+      //      var item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(databaseName);
+            await ApplicationData.Current.LocalFolder.CreateFileAsync(databaseName, CreationCollisionOption.OpenIfExists);
             OpenConnection();
             string tableCreate = "CREATE TABLE IF NOT EXISTS products (ProductName TEXT, Category TEXT, Price DECIMAL, Availability INTEGER)";
             command = new SqliteCommand(tableCreate, sqliteConnection);
@@ -46,24 +49,31 @@ namespace MobileApp_Server
             while (reader.Read())
             {
                 ToggleSwitch toggleSwitch = new ToggleSwitch();
+                
+                bool isItOn = true;
 
-                if (reader.GetInt16(3) == 1)
+                if (reader.GetInt16(3) == 0)
                 {
-                    
-                    toggleSwitch.IsOn = true;
+                    isItOn = false;
+                   
                 }
-                else
-                {
-                     toggleSwitch = new ToggleSwitch();
-                    toggleSwitch.IsOn = false;
-                }
-                products.Add(new Products_Class() {  product_Name = reader.GetString(0), category = reader.GetString(1), price = reader.GetDouble(2),toggle= toggleSwitch });
+
+                   toggleSwitch.Name = reader.GetString(0);                  
+                   products.Add(new Products_Class() { product_Name = reader.GetString(0), category = reader.GetString(1), price = reader.GetDouble(2), toggle = toggleSwitch, isOn = isItOn }) ;
             }
             return products;
         }
+
+        public void AvailabilityAlter(int i, string Pname)
+        {
+            OpenConnection();
+
+            command = new SqliteCommand("update products set Availability = " + i + " where ProductName = " +"'"+ Pname+"'",sqliteConnection);
+            reader = command.ExecuteReader();
+        }
         public void OpenConnection()
         {
-            databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, "ProductData.db");
+            databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, databaseName);
             sqliteConnection = new SqliteConnection($"Filename={databasePath}");
             sqliteConnection.Open();
         }

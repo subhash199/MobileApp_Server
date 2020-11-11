@@ -17,6 +17,7 @@ using Microsoft.Data.Sqlite;
 using Windows.ApplicationModel.VoiceCommands;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
+using System.Collections.ObjectModel;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -28,27 +29,28 @@ namespace MobileApp_Server
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private List<Products_Class> products = new List<Products_Class>();
-        public static SqliteConnection sqliteConnection;
-        public static SqliteCommand command = new SqliteCommand();
-        public static SqliteDataReader reader;
-        private DatabaseRequest request = new DatabaseRequest();
+
+        DatabaseRequest request = new DatabaseRequest();
+        ObservableCollection<Products_Class> product = new ObservableCollection<Products_Class>();
+       
         public MainPage()
         {
-            
+
+            bool isLoaded = false;
+           
             this.InitializeComponent();
             try
             {
-               request.CreateDatabase();
-                InventoryList.ItemsSource = request.ShowProducts();
                
+               // request.CreateDatabase();
+               product = request.ShowProducts();               
+               InventoryList.ItemsSource = request.ShowProducts();
+               isLoaded = true;
               
             }
             catch( Exception e)
             {
-              //  MessageDialog dialog = new MessageDialog(e.ToString());
-               // dialog.ShowAsync();
-                
+              
             }
            
         }
@@ -58,15 +60,41 @@ namespace MobileApp_Server
      
         private  void ServerButton_Toggled(object sender, RoutedEventArgs e)
         {
-            //if (ServerButton.IsOn == true)
-            //{
-
-            //}
+           
         }
 
         private void ItemAdd_Click(object sender, RoutedEventArgs e)
         {            
             Frame.Navigate(typeof(AddItem_Page));
+        }
+
+     
+  
+        private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
+        {
+            if(IsLoaded ==true)
+            {
+                 ToggleSwitch tSwitch = (sender as ToggleSwitch);
+
+                if (tSwitch.IsOn == true)
+                {
+                    request.AvailabilityAlter(1, tSwitch.Name);
+                }
+                else
+                {
+                    request.AvailabilityAlter(0, tSwitch.Name);
+                }
+               
+            }
+            
+        }
+
+        private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)
+        {
+            if (product != null)
+            {
+                InventoryList.ItemsSource = product.Where(a => a.product_Name.ToUpper().Contains(args.QueryText.ToUpper()));
+            }
         }
     }
 }

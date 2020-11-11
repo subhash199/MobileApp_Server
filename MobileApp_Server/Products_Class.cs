@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace MobileApp_Server
@@ -16,6 +17,9 @@ namespace MobileApp_Server
 
         public double price { get; set; }
         public ToggleSwitch toggle { get; set; }
+
+        
+        public bool isOn { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
         private void NotifyPropertyChanged(string propertyName)
