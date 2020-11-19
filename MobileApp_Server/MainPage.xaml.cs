@@ -18,6 +18,9 @@ using Windows.ApplicationModel.VoiceCommands;
 using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Net.Sockets;
+using System.Net;
 
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -31,50 +34,61 @@ namespace MobileApp_Server
     {
 
         DatabaseRequest request = new DatabaseRequest();
+        ServerClass server = new ServerClass();
         ObservableCollection<Products_Class> product = new ObservableCollection<Products_Class>();
-       
-        public MainPage()
+
+        public  MainPage()
         {
 
             bool isLoaded = false;
-           
+
             this.InitializeComponent();
             try
             {
-               
-               // request.CreateDatabase();
-               product = request.ShowProducts();               
-               InventoryList.ItemsSource = request.ShowProducts();
-               isLoaded = true;
-              
+
+                // request.CreateDatabase();
+                product = request.ShowProducts();
+                InventoryList.ItemsSource = request.ShowProducts();
+                isLoaded = true;
+                
+
+
             }
-            catch( Exception e)
+            catch (Exception e)
             {
-              
+
             }
-           
+
         }
 
-    
-     
-     
-        private  void ServerButton_Toggled(object sender, RoutedEventArgs e)
+
+        private void ServerButton_Toggled(object sender, RoutedEventArgs e)
         {
-           
+
+            if (ServerButton.IsOn == true)
+            {
+                //server.RunServer();
+                Thread serverThread = new Thread(new ThreadStart(server.RunServer));
+                serverThread.Start();
+            }
+            else
+            {
+                ServerClass.listener.Stop();
+            }
         }
 
         private void ItemAdd_Click(object sender, RoutedEventArgs e)
-        {            
+        {
             Frame.Navigate(typeof(AddItem_Page));
         }
 
-     
-  
+
+
         private void ToggleSwitch_Toggled(object sender, RoutedEventArgs e)
         {
-            if(IsLoaded ==true)
+            if (IsLoaded == true)
             {
-                 ToggleSwitch tSwitch = (sender as ToggleSwitch);
+                ToggleSwitch tSwitch = (sender as ToggleSwitch);
 
                 if (tSwitch.IsOn == true)
                 {
@@ -84,9 +98,9 @@ namespace MobileApp_Server
                 {
                     request.AvailabilityAlter(0, tSwitch.Name);
                 }
-               
+
             }
-            
+
         }
 
         private void SearchBox_QuerySubmitted(SearchBox sender, SearchBoxQuerySubmittedEventArgs args)

@@ -71,6 +71,24 @@ namespace MobileApp_Server
             command = new SqliteCommand("update products set Availability = " + i + " where ProductName = " +"'"+ Pname+"'",sqliteConnection);
             reader = command.ExecuteReader();
         }
+
+        public bool CheckIfExist(string PName)
+        {
+            bool isExist = false;
+            OpenConnection();
+            command = new SqliteCommand("select ProductName from products;", sqliteConnection);
+            reader = command.ExecuteReader();
+
+            while(reader.Read())
+            {
+                if(reader.GetString(0)==PName)
+                {
+                    isExist = true;
+                    break;
+                }
+            }
+            return isExist;
+        }
         public void OpenConnection()
         {
             databasePath = Path.Combine(ApplicationData.Current.LocalFolder.Path, databaseName);

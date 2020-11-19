@@ -42,7 +42,7 @@
                         <StackPanel Grid.Row="0" Grid.Column="1">
                             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                                 <TextBlock Text="Search Box" FontSize="24"/>
-                                <SearchBox x:Name="SearchBox" Width="200" FocusOnKeyboardInput="True" QuerySubmitted="SearchBox_QuerySubmitted" Margin="10,0,0,0"></SearchBox>
+                                <SearchBox x:Name="SearchBox" Width="200"  QuerySubmitted="SearchBox_QuerySubmitted" Margin="10,0,0,0"></SearchBox>
 
 
                             </StackPanel>
@@ -72,9 +72,9 @@
                                             <ColumnDefinition Width="263*"/>
                                         </Grid.ColumnDefinitions>
                                         <RelativePanel Grid.ColumnSpan="2">
-                                            <ListView x:Name="InventoryList"
+                                            <ListView x:Name="InventoryList" Height="500"
                                           SelectionMode="Single"
-                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible"
                   ScrollViewer.IsVerticalRailEnabled="True"
                   ScrollViewer.VerticalScrollMode="Enabled"
                   ScrollViewer.HorizontalScrollMode="Enabled"

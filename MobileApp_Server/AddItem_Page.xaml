@@ -28,7 +28,7 @@
                 <TextBlock Grid.Column="1" Text="Category" FontSize="24" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Column="2" Text="Price" FontSize="24" HorizontalAlignment="Center"/>
                 <TextBlock Grid.Column="3" Text="Availability" FontSize="24" HorizontalAlignment="Center"/>
-                <TextBox x:Name="productNameBox" Grid.Row="1" HorizontalAlignment="Center" Width="200"/>
+                <TextBox x:Name="productNameBox" FontSize="24" Grid.Row="1" HorizontalAlignment="Center" Width="200"/>
                 <ComboBox x:Name="categoryBox" Grid.Row="1" Grid.Column="1" PlaceholderText="Pick a Category" FontSize="22" Height="50" Width="200">
                     <x:String>Grocery</x:String>
                     <x:String>Soft Drinks</x:String>
@@ -39,7 +39,7 @@
                     <x:String>cigarette</x:String>
                     <x:String>Cleaning</x:String>
                 </ComboBox>
-                <TextBox x:Name="priceBox" Grid.Row="1" Grid.Column="2"/>
+                <TextBox x:Name="priceBox" FontSize="24" Grid.Row="1" Grid.Column="2"/>
                 <ComboBox x:Name="available" Grid.Row="1" Grid.Column="3" PlaceholderText="Select" FontSize="22" Height="50" Width="200">
                     <x:String>Yes</x:String>
                     <x:String>No</x:String>

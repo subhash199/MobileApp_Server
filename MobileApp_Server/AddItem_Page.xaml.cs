@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,18 +31,27 @@ namespace MobileApp_Server
             this.InitializeComponent();
         }
 
-        private void addItemButton_Click(object sender, RoutedEventArgs e)
+        private async void addItemButton_Click(object sender, RoutedEventArgs e)
         {
-            int pAvailable = 0;
-            if(available.SelectedIndex== 0)
+            if(request.CheckIfExist(productNameBox.Text)==false)
             {
-                pAvailable = 1;
+                int pAvailable = 0;
+                if (available.SelectedIndex == 0)
+                {
+                    pAvailable = 1;
+                }
+                else
+                {
+                    pAvailable = 0;
+                }
+                request.AddItem(productNameBox.Text, categoryBox.SelectedItem.ToString(), double.Parse(priceBox.Text), pAvailable);
             }
             else
             {
-                pAvailable = 0;
+                var messageDialog = new MessageDialog("Product already Exists");
+                await messageDialog.ShowAsync();
             }
-            request.AddItem(productNameBox.Text,categoryBox.SelectedItem.ToString(), double.Parse(priceBox.Text),pAvailable);
+          
        
         }
 
