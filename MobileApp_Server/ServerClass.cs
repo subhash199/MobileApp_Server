@@ -19,8 +19,10 @@ namespace MobileApp_Server
     {
         public static TcpListener listener;
 
+       public static DatabaseRequest request = new DatabaseRequest();
         public void RunServer()
         {
+            
 
             Socket connection;
             Handler requesthandler;
@@ -28,16 +30,22 @@ namespace MobileApp_Server
             {
                 listener = new TcpListener(IPAddress.Any, 5002);
                 listener.Start();
-                connection = listener.AcceptSocket();
-                requesthandler = new Handler();
-                Thread t = new Thread(() => requesthandler.ClientRequest(connection));
-                t.Start();
+                while(true)
+                {
+                    connection = listener.AcceptSocket();
+                    requesthandler = new Handler();
+                    // requesthandler.ClientRequest(connection);
+                    Thread t = new Thread(() => requesthandler.ClientRequest(connection));
+                    t.Start();
+                }
+                
             }
             catch
             {
                 //var messageDialog = new MessageDialog("Server not responding!");
                 //await messageDialog.ShowAsync();
             }
+           
         }
 
 
@@ -49,16 +57,52 @@ namespace MobileApp_Server
                 NetworkStream stream = new NetworkStream(connection);
                 StreamWriter sw = new StreamWriter(stream);
                 StreamReader sr = new StreamReader(stream);
-                sw.AutoFlush = true;
-                connection.Close();
+                sw.AutoFlush = true;                
                 try
                 {
-                    string readLine = sr.ReadToEnd();
+                    string readLine = sr.ReadLine();
+                    
+                    string[] info = readLine.Split('|');
+                    switch (info[0])
+                    {
+                        case "logIn":
+                           sw.WriteLine( UserLogIn(info));                            
+                            break;
+                        case "register":
+                           sw.WriteLine( RegisterUser(info));
+                            break;
+                        default:
+
+                            break;
+
+                    }
+                        
+
                 }
-                catch
+                catch(Exception e)
                 {
 
                 }
+                finally
+                {
+                    sr.Close();
+                    sw.Close();
+                    stream.Close();
+                    connection.Close();
+                    
+                }
+            }
+
+            private string RegisterUser(string[] info)
+            {
+              string value=  request.RegisterUser(info);
+               return value;
+            }
+
+            private string UserLogIn(string[] info)
+            {
+                string value = request.LogInUser(info);
+                return value;
             }
         }
     }

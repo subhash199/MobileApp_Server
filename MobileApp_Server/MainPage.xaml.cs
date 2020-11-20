@@ -46,7 +46,7 @@ namespace MobileApp_Server
             try
             {
 
-                // request.CreateDatabase();
+                request.CreateDatabase();
                 product = request.ShowProducts();
                 InventoryList.ItemsSource = request.ShowProducts();
                 isLoaded = true;
@@ -67,7 +67,7 @@ namespace MobileApp_Server
 
             if (ServerButton.IsOn == true)
             {
-                //server.RunServer();
+                // server.RunServer();
                 Thread serverThread = new Thread(new ThreadStart(server.RunServer));
                 serverThread.Start();
             }

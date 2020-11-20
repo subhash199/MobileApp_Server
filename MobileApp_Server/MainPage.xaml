@@ -30,7 +30,7 @@
                         <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="0" Grid.Row="0">
                             <StackPanel Orientation="Horizontal" Margin="10,0,0,0">
                                 <TextBlock Text="Server Active" Margin="0,5,0,0" ></TextBlock>
-                                <ToggleSwitch x:Name="ServerButton" Margin="10,0,0,0" Toggled="ServerButton_Toggled"/>
+                                <ToggleSwitch x:Name="ServerButton" IsOn="True" Margin="10,0,0,0" Toggled="ServerButton_Toggled"/>
                             </StackPanel>
                         </StackPanel>
                         <StackPanel Grid.Row="0" Grid.Column="2">
