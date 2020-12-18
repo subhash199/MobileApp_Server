@@ -20,7 +20,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="150"/>
                     <RowDefinition Height="50" />
                 </Grid.RowDefinitions>
                 
@@ -36,7 +36,7 @@
                     <x:String>Sweets</x:String>
                     <x:String>Crips</x:String>
                     <x:String>Alcohol</x:String>
-                    <x:String>cigarette</x:String>
+                    <x:String>Tobacco</x:String>
                     <x:String>Cleaning</x:String>
                 </ComboBox>
                 <TextBox x:Name="priceBox" FontSize="24" Grid.Row="1" Grid.Column="2"/>
@@ -51,7 +51,8 @@
 
 
                 </StackPanel>
-
+                <Button x:Name="ImagePicker" Grid.Row="2" Grid.Column="1" Content="Upload Img" Background="Transparent" BorderBrush="Black" HorizontalAlignment="Center" Grid.ColumnSpan="2"  Height="100"  Width="100" Click="ImagePicker_Click"></Button>
+                
 
             </Grid>
         </Viewbox>

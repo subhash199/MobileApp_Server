@@ -18,7 +18,7 @@ namespace MobileApp_Server
         public double price { get; set; }
         public ToggleSwitch toggle { get; set; }
 
-        
+                
         public bool isOn { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;

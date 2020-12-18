@@ -25,11 +25,12 @@ namespace MobileApp_Server
             //      var item = await ApplicationData.Current.LocalFolder.TryGetItemAsync(databaseName);
             await ApplicationData.Current.LocalFolder.CreateFileAsync(databaseName, CreationCollisionOption.OpenIfExists);
             OpenConnection();
-            string tableCreate = "CREATE TABLE IF NOT EXISTS products (ProductName TEXT, Category TEXT, Price DECIMAL, Availability INTEGER);";
+            //DropTable();
+            string tableCreate = "CREATE TABLE IF NOT EXISTS products (ProductName TEXT, Category TEXT, Price DECIMAL, Availability INTEGER, Image VARBINARY);";
             command = new SqliteCommand(tableCreate, sqliteConnection);
             command.ExecuteReader();
 
-            //DropTable();
+           
             tableCreate = "CREATE TABLE IF NOT EXISTS users (Name Text, Password Text, Address1 Text, Address2 Text, Postcode Text, Mobile Integer);";
             command = new SqliteCommand(tableCreate, sqliteConnection);
             command.ExecuteReader();
@@ -40,15 +41,15 @@ namespace MobileApp_Server
 
         public void DropTable()
         {
-            string sqlString = "Drop table users;";
+            string sqlString = "Drop table products;";
             command = new SqliteCommand(sqlString, sqliteConnection);
             command.ExecuteReader();
 
         }
-        public void AddItem(string productNameBox, string categoryBox, double priceBox, int available)
+        public void AddItem(string productNameBox, string categoryBox, double priceBox, int available, byte[] array)
         {
             OpenConnection();
-            string commandString = "INSERT INTO products (ProductName, Category, Price, Availability) VALUES (" + "'" + productNameBox + "','" + categoryBox + "'," + priceBox + "," + available + ");";
+            string commandString = "INSERT INTO products (ProductName, Category, Price, Availability, Image) VALUES (" + "'" + productNameBox + "','" + categoryBox + "'," + priceBox + "," + available + "',"+ array+"'"+");";
             command = new SqliteCommand(commandString, sqliteConnection);
             command.ExecuteReader();
             sqliteConnection.Close();
