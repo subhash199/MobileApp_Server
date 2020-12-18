@@ -38,26 +38,35 @@ namespace MobileApp_Server
 
         private async void addItemButton_Click(object sender, RoutedEventArgs e)
         {
-            if(request.CheckIfExist(productNameBox.Text)==false)
+            if(productNameBox!=null&&categoryBox!=null&&priceBox!=null&&available!=null&&array!=null)
             {
-                int pAvailable = 0;
-                if (available.SelectedIndex == 0)
+                if (request.CheckIfExist(productNameBox.Text) == false)
                 {
-                    pAvailable = 1;
+                    int pAvailable = 0;
+                    if (available.SelectedIndex == 0)
+                    {
+                        pAvailable = 1;
+                    }
+                    else
+                    {
+                        pAvailable = 0;
+                    }
+                    request.AddItem(productNameBox.Text, categoryBox.SelectedItem.ToString(), double.Parse(priceBox.Text), pAvailable, array);
                 }
                 else
                 {
-                    pAvailable = 0;
+                    var messageDialog = new MessageDialog("Product already Exists");
+                    await messageDialog.ShowAsync();
                 }
-                request.AddItem(productNameBox.Text, categoryBox.SelectedItem.ToString(), double.Parse(priceBox.Text), pAvailable, array);
+
             }
             else
             {
-                var messageDialog = new MessageDialog("Product already Exists");
+                var messageDialog = new MessageDialog("Fill in all the details!");
                 await messageDialog.ShowAsync();
             }
-          
-       
+
+
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

@@ -49,8 +49,15 @@ namespace MobileApp_Server
         public void AddItem(string productNameBox, string categoryBox, double priceBox, int available, byte[] array)
         {
             OpenConnection();
-            string commandString = "INSERT INTO products (ProductName, Category, Price, Availability, Image) VALUES (" + "'" + productNameBox + "','" + categoryBox + "'," + priceBox + "," + available + "',"+ array+"'"+");";
+            string commandString = "INSERT INTO products (ProductName, Category, Price, Availability, Image) VALUES (@ProductName, @Category, @Price, @Availability, @Image);";
             command = new SqliteCommand(commandString, sqliteConnection);
+            command.Parameters.AddWithValue("@ProductName", productNameBox);
+            command.Parameters.AddWithValue("@Category", categoryBox);
+            command.Parameters.AddWithValue("@Price", priceBox);
+            command.Parameters.AddWithValue("@Availability", available);
+            command.Parameters.AddWithValue("@Image", array);
+
+
             command.ExecuteReader();
             sqliteConnection.Close();
         }
